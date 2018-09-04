@@ -4,8 +4,6 @@ const pkg = require(`./package.json`)
 
 const SERVICE_WORKER_NAME = `nuxtpwatest-service-worker.js`
 const isProd = process.env.NODE_ENV === `production`
-const isDev = !isProd
-
 const baseURL = isProd ? `https://127.0.0.1:8080/` : `http://127.0.0.1:3000/`
 
 module.exports = {
@@ -32,6 +30,7 @@ module.exports = {
         workbox: {
           cacheId: `nuxtpwatest-cache-v1`,
           // change workbox file name
+          // need to be in /public folder in order to be copied in /dist
           swDest: path.join(__dirname, `static`, SERVICE_WORKER_NAME),
           // need this parameter for automatic SW registration
           routerBase: baseURL,
@@ -78,19 +77,6 @@ module.exports = {
   plugins: [`@/plugins/global-components.js`],
   build: {
     publicPath: baseURL,
-    babel: {
-      plugins: [`transform-object-rest-spread`],
-    },
-    postcss: {
-      plugins: {
-        'postcss-cssnext': {
-          features: {
-            // processing custom properties make them fail
-            customProperties: false,
-          },
-        },
-      },
-    },
   },
   generate: {
     dir: `dist`,
