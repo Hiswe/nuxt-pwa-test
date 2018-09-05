@@ -37,7 +37,7 @@ module.exports = {
           importWorkboxFrom: `local`,
           swURL: `${SERVICE_WORKER_NAME}`,
           globPatterns: [`**/*.{js,css,json}`],
-          debug: true,
+          dev: true,
           skipWaiting: false,
           clientsClaim: false,
           runtimeCaching: [
